@@ -9,11 +9,14 @@ import matplotlib.image as mpimg
 DATA_PREFIX = "data:image/png;base64,"
 
 
-def handle_image_loaded():
+def process_image():
     image_data_url = js.document.getElementById("img-input").src
+    if image_data_url is None or not image_data_url.startswith("data:"):
+        js.window.alert("no image data loaded")
+        return
     if not image_data_url.startswith(DATA_PREFIX):
         js.window.alert("invalid image data, only support PNG")
-        raise NotImplementedError("only support png")
+        return
     image_data = base64.b64decode(image_data_url[len(DATA_PREFIX):])
     js.console.log(f"python read raw image data ok, length: {len(image_data)}")
     img = mpimg.imread(io.BytesIO(image_data))
@@ -28,13 +31,13 @@ def handle_image_loaded():
 
 def show_loaded_message():
     version_info = {
-        "python": sys.version.split("\n")[0],
+        "python": sys.version.split("(")[0].strip(),
         "pyodide": js.pyodide.version(),
         "numpy": np.__version__,
         "matplotlib": matplotlib.__version__,
     }
-    version_info_str = "\n".join([f"\t{k}: {v}" for k, v in version_info.items()])
-    message = f"Python initialization complete, loaded versions:\n{version_info_str}"
+    version_info_str = ", ".join([f"{k}: {v}" for k, v in version_info.items()])
+    message = f"Python initialization complete, loaded versions: [{version_info_str}]"
     js.document.getElementById("p-python-loaded-message").innerHTML = message
 
 

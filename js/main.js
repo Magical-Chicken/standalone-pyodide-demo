@@ -4,13 +4,19 @@ function handleImageSelected(ev) {
     if (files && files.length) {
         var fileReader = new FileReader();
         fileReader.onload = () => {
-            // clear output contents
-            document.getElementById("img-output").src = null;
-            // set preview window contents
+            document.getElementById("img-output").src = "";
             document.getElementById("img-input").src = fileReader.result;
-            // inform python land image is ready
-            pyodide.runPythonAsync(`handle_image_loaded()`);
         };
         fileReader.readAsDataURL(files[0]);
     }
+}
+
+function handleProcessButton(ev) {
+    document.getElementById("img-output").src = "";
+    pyodide.runPythonAsync(`process_image()`);
+}
+
+function handleClearButton(ev) {
+    document.getElementById("img-input").src = "";
+    document.getElementById("img-output").src = "";
 }

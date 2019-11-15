@@ -5,21 +5,40 @@
     <script src="pyodide-0.14.1/pyodide.js"></script>
     <script src="js/pythonLauncher.js"></script>
     <script src="js/main.js"></script>
-    <title>Pyodide Test</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+    <title>python in your browser</title>
 </head>
 <body>
     <header>
-        <h3>Pyodide Test</h3>
-        <pre id="p-python-loaded-message">Python currently being initialized</pre>
+        <b>python in your browser</b> | a simple demo using pyodide
     </header>
-    <div>
-        <input type="file" id="input-image-selector"></input><br>
-        <img id="img-input" width="200px"></img>
-        <img id="img-output" width="200px"></img>
+    <div id="main-container">
+        <div id="controls">
+            <label for="input-image-selector">Select image:<label>
+            <input type="file" id="input-image-selector" accept="image/png">
+            <button name="process" id="button-process">Process</button>
+            <button name="clear" id="button-clear">Clear</button>
+        </div>
+        <div id="images">
+            <div id="input-container">
+                <img id="img-input" class="main-image"></img>
+            </div>
+            <div id="output-continer">
+                <img id="img-output" class="main-image"></img>
+            </div>
+        </div>
     </div>
+    <footer>
+        <pre id="p-python-loaded-message">Python currently being initialized...</pre>
+    </footer>
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", pythonLauncher, false);
-        document.getElementById("input-image-selector").onchange = handleImageSelected;
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("input-image-selector").onchange = handleImageSelected;
+            document.getElementById("button-process").onclick = handleProcessButton;
+            document.getElementById("button-clear").onclick = handleClearButton;
+        }, false);
     </script>
 </body>
 </html>

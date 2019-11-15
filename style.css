@@ -1,0 +1,59 @@
+body {
+    height: 100%;
+    background-color: #a9a;
+    padding: 0;
+    margin: 0;
+    font-family: 'Droid Serif', serif;
+}
+
+header {
+    color: #000;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: dotted 1px;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    background-color: #a9a;
+    font-size: 12pt;
+    vertical-align: middle;
+}
+
+header b {
+    font-size: 15pt;
+}
+
+div#main-container {
+    padding: 20px;
+    height: 100%;
+    position: relative;
+}
+
+div#controls {
+}
+
+div#images {
+    height: 100%;
+}
+
+img.main-image {
+    max-width: 800px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    border-top: dotted 1px;
+    background-color: #a9a;
+    width: 100%;
+}
+
+footer pre {
+    margin: 0;
+}
